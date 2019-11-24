@@ -22,15 +22,16 @@ def get_game_metadata(url):
         tags = json.loads(tags.group())
         count = 0
         for tag in tags:
-            if count >= 5:
+            if count > 10:
                 break
             else:
                 out_tags.append(tag['name'])
             count += 1
     
     dlc = re.search(r'<div class=\"content\">(.*?)<h1>Downloadable Content</h1><p>', scrape, re.DOTALL)
-    out_dlc = False
-    if dlc:
-        out_dlc = True
+    movie = re.search('<h2>Steam Video</h2>', scrape)
 
-    return (out_rating, out_tags, out_dlc)
+    if dlc or movie:
+        return None
+
+    return (out_rating, out_tags)

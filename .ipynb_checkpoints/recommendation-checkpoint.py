@@ -7,8 +7,9 @@ from sklearn.model_selection import train_test_split
 #input a user's steamid and the full data set. The function look up his data and drop it 
 
 
-def recommendation(users_steam_id, total_data0):
+def recommendation(users_steam_id, total_data1):
     #getting the users data who were are testing a dropping it's row from the data
+    total_data0 = total_data1.copy()
     users_data = total_data0.loc[total_data0['Steam_id']== int(users_steam_id)]
     total_data = total_data0.drop(users_data.index[0])
     
