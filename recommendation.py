@@ -71,13 +71,20 @@ def recommendation(users_steam_id, total_data1):
         #finds the game that is most played by the similar user and the user we are testing for doesn't have
         game_suggestion = 0
 
+        one_suggestion = -1
+        prev = -1
         for i in (similar_user_data):
             one_game_sim_user2 = int(similar_user_data[str(i)].values[0])   
-
+    
             if one_game_sim_user2 > game_suggestion:
                 game_suggestion = one_game_sim_user2
+                if one_suggestion != -1:
+                    prev = one_suggestion
                 one_suggestion = i 
 
-        final_suggestion.append(one_suggestion)
+        if one_suggestion != -1:
+            final_suggestion.append(one_suggestion)
+        if prev != -1:
+            final_suggestion.append(prev)
 
     return final_suggestion
